@@ -1,10 +1,9 @@
 name: Release Chrome Extension
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
-  workflow_dispatch:
+  release:
+    types:
+      - published
 
 jobs:
   release:
