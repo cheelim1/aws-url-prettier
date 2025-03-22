@@ -1,0 +1,21 @@
+{
+   "manifest_version": 3,
+   "name": "AWS URL Prettier",
+   "version": "1.0",
+   "description": "Removes the multi-session dynamic value from AWS console URLs for easy sharing.",
+   "permissions": ["activeTab", "scripting", "clipboardWrite"],
+   "icons": {
+     "16": "icon.png",
+     "48": "icon.png",
+     "128": "icon.png"
+   },
+   "action": {
+     "default_popup": "popup.html",
+     "default_icon": {
+       "16": "icon.png",
+       "48": "icon.png",
+       "128": "icon.png"
+     }
+   }
+ }
+ 

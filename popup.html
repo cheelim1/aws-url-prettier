@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AWS URL Prettier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" 
+    rel="stylesheet"
+  >
+  <style>
+    :root {
+      --bg-gradient-start: #141E30;
+      --bg-gradient-end: #243B55;
+      --accent-color: #007acc;
+      --light-text: #ffffff;
+      --subtle-text: rgba(255, 255, 255, 0.6);
+      --border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fira Code', monospace;
+      background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--light-text);
+      width: 400px;
+      min-height: 280px;
+      max-height: 600px;
+      overflow: auto; /* allow scrolling if needed */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header {
+      width: 100%;
+      padding: 16px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      gap: 12px;
+      width: 100%;
+    }
+    .url-display {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      padding: 12px;
+      border-radius: 8px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      position: relative;
+      font-size: 14px;
+      max-height: 100px;
+      overflow-y: auto;
+    }
+
+    .url-display::before {
+      content: "Updated URL";
+      font-size: 10px;
+      color: var(--subtle-text);
+      position: absolute;
+      top: -6px;
+      left: 12px;
+      background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end));
+      padding: 2px 4px;
+      border-radius: 4px;
+      transform: translateY(-50%);
+    }
+    .buttons {
+      display: flex;
+      gap: 8px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: var(--accent-color);
+      border: none;
+      border-radius: 4px;
+      color: #ffffff;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.1s ease;
+    }
+    button:hover {
+      background-color: #005b99;
+    }
+    button:active {
+      transform: scale(0.97);
+    }
+    .footer {
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: var(--subtle-text);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">AWS URL Prettier</div>
+  <div class="content">
+    <div id="urlDisplay" class="url-display">Loading...</div>
+    <div class="buttons">
+      <button id="showFullBtn" style="display: none;">Show Full</button>
+      <button id="copyBtn">Copy Updated URL</button>
+    </div>
+  </div>
+  <div class="footer">By CL</div>
+  <script src="popup.js"></script>
+</body>
+</html>
