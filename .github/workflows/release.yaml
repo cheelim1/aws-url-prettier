@@ -1,0 +1,17 @@
+name: Release Chrome Extension
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create zip file
+        run: |
+          zip -r aws-url-prettier.zip .
