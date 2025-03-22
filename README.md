@@ -10,3 +10,6 @@ This is a simple fun project to build a chrome extension to make it slightly eas
 5. Reload your browser and you can now try it out in your AWS console.
 
 Or just follow this [link](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
+
+### Why is it called aws url prettier?
+Cuz, i can't think of a better name while building this and naming is hard.
