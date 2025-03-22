@@ -1,9 +1,9 @@
 # AWS URL Prettier
 
-This is a simple fun project to build a chrome extension to make it slightly easier to share AWS links with AWS multi session support enabled. 
+This is a simple fun project to build a chrome extension to make it slightly easier to share AWS links with [AWS multi session support](https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/multisession.html) enabled. 
 
 ## Chrome Extension
-1. Clone this repo.
+1. Clone this repo. Or download the [zip file](https://github.com/cheelim1/aws-url-prettier/archive/refs/tags/v1.0.0.zip)
 2. Go to google chrome [Manage extensions](chrome://extensions/)
 3. Enable Developer mode
 4. Load unpacked and click on this project.
