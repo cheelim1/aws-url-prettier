@@ -164,11 +164,23 @@ async function init() {
   }
 
   if (ctx.accountId || ctx.roleName) {
-    const acctLabel = ctx.accountId ? `<strong>${ctx.accountId}</strong>` : "<em>unknown</em>";
-    const roleLabel = ctx.roleName ? `<strong>${ctx.roleName}</strong>` : "<em>unknown</em>";
-    detectedInfo.innerHTML =
-      `Detected: account ${acctLabel} · role ${roleLabel}` +
-      (ctx.source ? ` <span style="opacity:0.5">(${ctx.source})</span>` : "");
+    detectedInfo.replaceChildren();
+
+    const acctLabel = document.createElement(ctx.accountId ? "strong" : "em");
+    acctLabel.textContent = ctx.accountId || "unknown";
+
+    const roleLabel = document.createElement(ctx.roleName ? "strong" : "em");
+    roleLabel.textContent = ctx.roleName || "unknown";
+
+    detectedInfo.append("Detected: account ", acctLabel, " · role ", roleLabel);
+
+    if (ctx.source) {
+      const sourceLabel = document.createElement("span");
+      sourceLabel.style.opacity = "0.5";
+      sourceLabel.textContent = `(${ctx.source})`;
+      detectedInfo.append(" ", sourceLabel);
+    }
+
     detectedInfo.style.display = "block";
   }
 
