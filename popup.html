@@ -5,8 +5,8 @@
   <title>AWS URL Prettier</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" 
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap"
     rel="stylesheet"
   >
   <style>
@@ -19,28 +19,26 @@
       --border-color: rgba(255, 255, 255, 0.2);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
       font-family: 'Fira Code', monospace;
       background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end));
       color: var(--light-text);
-      width: 400px;
+      width: 420px;
       min-height: 280px;
       max-height: 600px;
-      overflow: auto; /* allow scrolling if needed */
+      overflow: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .header {
       width: 100%;
-      padding: 16px;
+      padding: 14px;
       text-align: center;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
       border-bottom: 1px solid var(--border-color);
     }
@@ -48,11 +46,43 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       padding: 16px;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
     }
+    .mode-toggle {
+      display: flex;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 4px;
+      border-radius: 6px;
+    }
+    .mode-toggle button {
+      flex: 1;
+      padding: 6px 10px;
+      background: transparent;
+      border: none;
+      color: var(--subtle-text);
+      cursor: pointer;
+      font-size: 12px;
+      font-family: inherit;
+      border-radius: 4px;
+    }
+    .mode-toggle button.active {
+      background: var(--accent-color);
+      color: white;
+    }
+    .detected {
+      font-size: 11px;
+      color: var(--subtle-text);
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed var(--border-color);
+      border-radius: 6px;
+      line-height: 1.5;
+    }
+    .detected strong { color: var(--light-text); font-weight: 500; }
     .url-display {
       width: 100%;
       background-color: rgba(255, 255, 255, 0.08);
@@ -62,11 +92,10 @@
       word-wrap: break-word;
       overflow-wrap: break-word;
       position: relative;
-      font-size: 14px;
-      max-height: 100px;
+      font-size: 13px;
+      max-height: 130px;
       overflow-y: auto;
     }
-
     .url-display::before {
       content: "Updated URL";
       font-size: 10px;
@@ -82,8 +111,9 @@
     .buttons {
       display: flex;
       gap: 8px;
+      justify-content: center;
     }
-    button {
+    button.action {
       padding: 8px 16px;
       background-color: var(--accent-color);
       border: none;
@@ -91,31 +121,58 @@
       color: #ffffff;
       cursor: pointer;
       font-weight: 600;
-      transition: background-color 0.3s ease, transform 0.1s ease;
+      font-family: inherit;
+      transition: background-color 0.2s ease, transform 0.1s ease;
     }
-    button:hover {
-      background-color: #005b99;
-    }
-    button:active {
-      transform: scale(0.97);
-    }
-    .footer {
-      margin-bottom: 8px;
+    button.action:hover { background-color: #005b99; }
+    button.action:active { transform: scale(0.97); }
+    .warning {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      background: rgba(255, 200, 0, 0.12);
+      border: 1px solid rgba(255, 200, 0, 0.3);
+      color: #ffd966;
       font-size: 12px;
+      line-height: 1.4;
+    }
+    .warning a { color: #ffd966; text-decoration: underline; cursor: pointer; }
+    .footer {
+      margin-bottom: 10px;
+      font-size: 11px;
       color: var(--subtle-text);
+      display: flex;
+      gap: 12px;
+    }
+    .footer a {
+      color: var(--subtle-text);
+      cursor: pointer;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="header">AWS URL Prettier</div>
   <div class="content">
+    <div id="warningBox" class="warning" style="display:none;"></div>
+
+    <div id="modeToggle" class="mode-toggle" style="display:none;">
+      <button id="ssoModeBtn" class="active">SSO link</button>
+      <button id="cleanModeBtn">Non SSO URL</button>
+    </div>
+
+    <div id="detectedInfo" class="detected" style="display:none;"></div>
+
     <div id="urlDisplay" class="url-display">Loading...</div>
     <div class="buttons">
-      <button id="showFullBtn" style="display: none;">Show Full</button>
-      <button id="copyBtn">Copy Updated URL</button>
+      <button id="showFullBtn" class="action" style="display: none;">Show Full</button>
+      <button id="copyBtn" class="action">Copy URL</button>
     </div>
   </div>
-  <div class="footer">By CL</div>
+  <div class="footer">
+    <span>By CL</span>
+    <a id="settingsLink">Settings</a>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>
