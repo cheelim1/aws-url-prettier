@@ -143,7 +143,14 @@ async function init() {
 
   const cleanUrl = cleanAWSUrl(tab.url);
   const [{ ssoPortal }, ctx] = await Promise.all([
-    new Promise((res) => chrome.storage.sync.get({ ssoPortal: "" }, res)),
+    new Promise((res) => {
+      if (chrome?.storage?.sync) {
+        chrome.storage.sync.get({ ssoPortal: "" }, res);
+      } else {
+        console.warn("chrome.storage.sync unavailable — reload the extension.");
+        res({ ssoPortal: "" });
+      }
+    }),
     detectAwsContext(tab),
   ]);
 

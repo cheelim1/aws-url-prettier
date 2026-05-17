@@ -1,6 +1,10 @@
 const DEFAULTS = { ssoPortal: "" };
 
 function load() {
+  if (!chrome?.storage?.sync) {
+    console.warn("chrome.storage.sync unavailable — reload the extension.");
+    return;
+  }
   chrome.storage.sync.get(DEFAULTS, (cfg) => {
     document.getElementById("ssoPortal").value = cfg.ssoPortal || "";
   });
@@ -14,6 +18,10 @@ function save() {
     .replace(/\.awsapps\.com.*$/i, "")
     .replace(/\/.*$/, "");
 
+  if (!chrome?.storage?.sync) {
+    console.warn("chrome.storage.sync unavailable — reload the extension.");
+    return;
+  }
   chrome.storage.sync.set({ ssoPortal }, () => {
     const status = document.getElementById("status");
     status.textContent = ssoPortal ? `Saved: ${ssoPortal}.awsapps.com` : "Cleared.";
